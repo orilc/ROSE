@@ -12,6 +12,10 @@ class Player(object):
         self.action = None
         self.response_time = None
         self.score = None
+        self.penguin_count = 0
+        self.water_count = 0
+        self.crack_count = 0
+        self.collision_count = 0
         self.reset()
 
     # Game state interface

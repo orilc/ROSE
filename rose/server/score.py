@@ -19,6 +19,10 @@ def process(players, track):
     # First handle right and left actions, since they may change in_lane
     # status, used for resolving collisions.
 
+    score_from_CRACK = 0
+    score_from_WATER = 0
+    score_from_PENGUINE = 0
+
     for player in six.itervalues(players):
         if player.action == actions.LEFT:
             if player.x > 0:
@@ -40,8 +44,12 @@ def process(players, track):
             if player.action != actions.JUMP:
                 track.clear(player.x, player.y)
                 player.y += 1
+                # adding collision
+                player.collision_count += 1
                 player.score += config.score_move_backward * 2
             else:
+                # adding crack
+                player.crack_count += 1
                 player.score += config.score_jump
         elif obstacle in (obstacles.TRASH,
                           obstacles.BIKE,
@@ -49,17 +57,25 @@ def process(players, track):
             if player.action not in (actions.LEFT, actions.RIGHT):
                 track.clear(player.x, player.y)
                 player.y += 1
+                # adding collision
+                player.collision_count += 1
                 player.score += config.score_move_backward * 2
         elif obstacle == obstacles.WATER:
             if player.action != actions.BRAKE:
                 track.clear(player.x, player.y)
                 player.y += 1
+                # adding collision
+                player.collision_count += 1
                 player.score += config.score_move_backward * 2
             else:
+                # adding water
+                player.water_count += 1
                 player.score += config.score_brake
         elif obstacle == obstacles.PENGUIN:
             if player.action == actions.PICKUP:
                 track.clear(player.x, player.y)
+                # adding penguin
+                player.penguin_count += 1
                 player.score += config.score_move_forward
 
         # Here we can end the game when player gets out of
