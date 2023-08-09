@@ -12,9 +12,9 @@ class Player(object):
         self.action = None
         self.response_time = None
         self.score = None
-        self.penguin_count = 0
-        self.water_count = 0
-        self.crack_count = 0
+        self.penguin_collected = 0
+        self.water_collected = 0
+        self.crack_collected = 0
         self.collision_count = 0
         self.reset()
 

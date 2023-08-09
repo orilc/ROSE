@@ -6,6 +6,9 @@ class Track(object):
 
     def __init__(self):
         self._matrix = None
+        self.penguin_counter = 0
+        self.crack_counter = 0
+        self.water_counter = 0
         self.reset()
 
     # Game state interface
@@ -14,6 +17,18 @@ class Track(object):
         """ Go to the next game state """
         self._matrix.pop()
         self._matrix.insert(0, self._generate_row())
+
+    def searching_penguin(self):
+        if obstacles.PENGUIN in self._matrix[0]:
+            self.penguin_counter += 1
+
+    def searching_crack(self):
+        if obstacles.CRACK in self._matrix[0]:
+            self.crack_counter += 1
+
+    def searching_water(self):
+        if obstacles.WATER in self._matrix[0]:
+            self.water_counter += 1
 
     def state(self):
         """ Return read only serialize-able state for sending to client """

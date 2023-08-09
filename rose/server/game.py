@@ -114,6 +114,9 @@ class Game(object):
 
     def loop(self):
         self.track.update()
+        self.track.searching_penguin()
+        self.track.searching_crack()
+        self.track.searching_water()
         score.process(self.players, self.track)
         if self.timeleft > 0:
             self.update_clients()
