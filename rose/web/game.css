@@ -84,6 +84,16 @@ body {
  position: relative;
 }
 
+#players_end_game {
+ background-image: url('../res/dashboard/dashboard.png');
+ width: 910px;
+ height: 511px;
+ font-weight: bold;
+ font-family: sans-serif;
+ color: rgb(153, 153, 153);
+ position: relative;
+}
+
 .player {
  width: 350px;
  height: 100px;

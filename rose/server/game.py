@@ -1,7 +1,7 @@
 import random
 import logging
 import os
-
+import time
 import six
 
 from twisted.internet import reactor, task
@@ -64,6 +64,14 @@ class Game(object):
         self.started = False
         self.update_clients()
         self.print_stats()
+        msg = message.Message('stat', self.state())
+        self.hub.broadcast(msg)
+        for i in range(30):
+            time.sleep = 30
+        msg = message.Message('update', self.state())
+        self.hub.broadcast(msg)
+
+
 
     def add_player(self, name):
         if name in self.players:
@@ -127,6 +135,7 @@ class Game(object):
     def update_clients(self):
         msg = message.Message('update', self.state())
         self.hub.broadcast(msg)
+
 
     def state(self):
         return {'started': self.started,

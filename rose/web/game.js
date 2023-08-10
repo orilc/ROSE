@@ -32,14 +32,12 @@ var ROSE = (function() {
 
     App.prototype.onmessage = function(m) {
         var msg = JSON.parse(m.data);
-        if (msg.action !== "update") {
+        if (msg.action !== "update" && msg.action !== "stat") {
             console.log("Ignoring unknown message: " + m.data);
             return;
         }
-
-        var state = msg.payload;
-
         // Update
+        var state = msg.payload;
         this.controller.update(state);
         this.rate.update(state.rate);
         this.dashboard.update(state);
@@ -49,11 +47,17 @@ var ROSE = (function() {
         this.finish_line.update(state);
 
         // Draw
-        this.dashboard.draw(this.context);
-        this.track.draw(this.context);
-        this.obstacles.draw(this.context);
-        this.cars.draw(this.context);
-        this.finish_line.draw(this.context);
+        if (msg.action === "update") {
+            this.dashboard.draw(this.context);
+            this.track.draw(this.context);
+            this.obstacles.draw(this.context);
+            this.cars.draw(this.context);
+            this.finish_line.draw(this.context);
+        }
+        else if (msg.action == "stat"){
+            this.dashboard.draw(this.context);
+
+        }
     }
 
     var Config = {

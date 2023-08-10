@@ -50,4 +50,8 @@ class Player(object):
                 'x': self.x,
                 'y': self.y,
                 'lane': self.lane,
-                'score': self.score}
+                'score': self.score,
+                'penguin_collected': self.penguin_collected,
+                'water_collected': self.water_collected,
+                'crack_collected': self.crack_collected,
+                'collision_count': self.collision_count}
